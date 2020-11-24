@@ -23,6 +23,7 @@ let shuffleOrder = () => {
         let elementColor = createColorElement(order[i]);
         lightColor(elementColor, Number(i) + 1);
     }
+}
 
     //-------acende a proxima cor
     let lightColor = (element, number) => {
@@ -31,10 +32,10 @@ let shuffleOrder = () => {
             element.classList.add('selected');
         }, number = 250);
         setTimeout(() => {
-            element.classlist.remove('selected');
-        })
+            element.classList.remove('selected');
+        });
     }
-}
+
 
 //-------------checa se os botões clicados são os mesmos da ordem gerada no jogo
 
@@ -45,6 +46,7 @@ let checkOrder = () => {
             break;
         }
     }
+    
     if(clickedOrder.length == order.length) {
         alert(`Pontuação: ${score}\nVoê acertou! Iniciando proximo nivel!`);
         nextLevel();
@@ -101,9 +103,10 @@ let playGame = () => {
     nextLevel();
 }
 
-green.addEventListener(`click`, click(0));
-red.addEventListener(`click`, click(1));
-yellow.addEventListener(`click`, click(2));
-blue.addEventListener(`click`, click(3));
+
+green.onclick = () => click(0);
+red.onclick = () => click(1);
+yellow.onclick = () => click(2);
+blue.onclick = () => click(3);
 
 playGame();
