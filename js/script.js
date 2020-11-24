@@ -41,7 +41,7 @@ let shuffleOrder = () => {
 let checkOrder = () => {
     for(let i in clickedOrder) {
         if(clickedOrder[i] != order[i]) {
-            lose();
+            gameOver();
             break;
         }
     }
@@ -58,7 +58,52 @@ let click = (color) => {
 
     setTimeout(() => {
         createColorElement(color).classList.remove('selected');
-    })
-
-    checkOrder();
+        checkOrder();
+    },250);
 }
+
+//------função que retorna a cor
+let createColorElement = (color) => {
+    if (color == 0) {
+        return green;
+    }
+    else if (color == 1) {
+        return red;
+    }
+    else if (color == 2) {
+        return yellow;
+    }
+    else if (color == 3) {
+        return blue;
+    }
+}
+
+//------Função para próximo nivel do jogo
+let nextLevel = () => {
+    score++;
+    shuffleOrder();
+}
+
+//-------Função para game over
+let gameOver = () => {
+    alert(`Pontuação: ${score}!\nVocê perdeu o jogo!\nClique em OK para iniciar um novo jogo`);
+    order = [];
+    clickedOrder = [];
+
+    playGame();
+}
+
+//----Função reinicar game
+let playGame = () => {
+    alert(`Bem vindo ao Gênesia! Iniciando novo jogo!`);
+    score = 0;
+
+    nextLevel();
+}
+
+green.addEventListener(`click`, click(0));
+red.addEventListener(`click`, click(1));
+yellow.addEventListener(`click`, click(2));
+blue.addEventListener(`click`, click(3));
+
+playGame();
